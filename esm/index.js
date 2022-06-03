@@ -1,9 +1,12 @@
 /*! (c) Andrea Giammarchi - ISC */
 import {watch, readFileSync} from 'node:fs';
 
+const VOID = void 0;
+
 const {parse} = JSON;
 const {assign} = Object;
 const {ownKeys} = Reflect;
+const {replace} = String.prototype;
 
 const handler = {
   deleteProperty: ($, key) => (delete $()[key]),
@@ -16,6 +19,10 @@ const handler = {
   }
 };
 
+const asJSON = path => parse(
+  replace.call(readFileSync(path), /^\s*\/\/.*/gm, '')
+);
+
 /**
  * Returns a Proxy of a callback with lazy synchronous JSON parsing.
  * The callback is used to keep the state of the file in sync with
@@ -26,10 +33,7 @@ const handler = {
  * @returns {Proxy<function>}
  */
 export default (path, options) => {
-  let json;
-  watch(path, assign({persistent: false}, options), () => { json = void 0; });
-  return new Proxy(
-    () => (json === void 0 ? (json = parse(readFileSync(path))) : json),
-    handler
-  );
+  let $;
+  watch(path, assign({persistent: false}, options), () => { $ = VOID; });
+  return new Proxy(() => ($ === VOID ? ($ = asJSON(path)) : $), handler);
 };

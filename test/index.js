@@ -12,10 +12,10 @@ console.assert(json().hasOwnProperty('test'));
 
 console.assert(json.test === 123);
 console.assert(JSON.stringify(json) === '{"test":123}');
-writeFile(file, '{"test":456}', err => {
+writeFile(file, '// this is ignored\n{"test":456}', err => {
   console.assert(err === null);
   console.assert(json.test === 456);
-  writeFile(file, '{"test":123}', err => {
+  writeFile(file, '// this is ignored\n{"test":123}', err => {
     console.assert(err === null);
     console.assert(json.test === 123);
     json.test = 456;

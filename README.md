@@ -31,3 +31,13 @@ writeFile('/path/to/file.json', JSON.stringify(json), _ => {
 The default export `watcher(path[, options])` accepts an optional object to configure the `watch(path, options)` node operation.
 
 By default, the `options` object contains `{persistent: false}`. All [options for watch](https://nodejs.org/docs/latest/api/fs.html#fswatchfilename-options-listener) are available.
+
+## What are the differenced compared to the old module?
+
+  * multiple paths can be observerd, not just one per time
+  * the first read is lazy
+  * Proxy is (imho) a better DX for this kind of utility use cases
+  * the amount of consumed memory is fine-tuned to the minumum
+  * the JSON can contain single line comments which, even if not allowed by specs, is practical for `settings.json` like config files and entries description
+  * it has 100% code coverage
+  * it's a dual ESM / CJS module
