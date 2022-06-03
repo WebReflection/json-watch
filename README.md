@@ -28,6 +28,6 @@ writeFile('/path/to/file.json', JSON.stringify(json), _ => {
 });
 ```
 
-The default export `watcher(path[, options])` accepts an optional object to configures the `watch(path, options)` node operation.
+The default export `watcher(path[, options])` accepts an optional object to configure the `watch(path, options)` node operation.
 
 By default, the `options` object contains `{persistent: false}`. All [options for watch](https://nodejs.org/docs/latest/api/fs.html#fswatchfilename-options-listener) are available.
