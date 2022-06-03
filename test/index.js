@@ -11,6 +11,7 @@ console.assert(JSON.stringify(Reflect.ownKeys(json)) === '["test"]');
 console.assert(json().hasOwnProperty('test'));
 
 console.assert(json.test === 123);
+console.assert(JSON.stringify(json) === '{"test":123}');
 writeFile(file, '{"test":456}', err => {
   console.assert(err === null);
   console.assert(json.test === 456);

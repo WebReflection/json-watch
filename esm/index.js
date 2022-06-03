@@ -6,7 +6,7 @@ const {ownKeys} = Reflect;
 
 const handler = {
   deleteProperty: ($, key) => (delete $()[key]),
-  get: ($, key) => $()[key],
+  get: ($, key) => (key === 'toJSON' ? $ : $()[key]),
   has: ($, key) => (key in $()),
   ownKeys: ($) => ownKeys($()),
   set: ($, key, value) => {
