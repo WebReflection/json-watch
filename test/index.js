@@ -3,7 +3,7 @@ const {writeFile} = require('node:fs');
 const watch = require('../cjs');
 
 const file =join(__dirname, 'index.json');
-const json = watch(file);
+let json = watch(file);
 
 console.assert('test' in json);
 console.assert(!('length' in json));
@@ -20,5 +20,12 @@ writeFile(file, '{"test":456}', err => {
     console.assert(json.test === 123);
     json.test = 456;
     console.assert(json.test === 456);
+    console.assert(delete json.test);
+    console.assert(!json.test);
+    const ac = new AbortController;
+    const {signal} = ac;
+    json = watch(file, {persistent: true, signal});
+    console.log('\x1b[1mPersistent\x1b[0m', JSON.stringify(json));
+    setTimeout(ac.abort.bind(ac), 250);
   });
 });
