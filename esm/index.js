@@ -12,11 +12,8 @@ const handler = {
   deleteProperty: ($, key) => (delete $()[key]),
   get: ($, key) => (key === 'toJSON' ? $ : $()[key]),
   has: ($, key) => (key in $()),
-  ownKeys: ($) => ownKeys($()),
-  set: ($, key, value) => {
-    $()[key] = value;
-    return true;
-  }
+  ownKeys: $ => ownKeys($()),
+  set: ($, key, value) => (($()[key] = value), true)
 };
 
 const asJSON = path => parse(

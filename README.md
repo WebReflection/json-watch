@@ -2,6 +2,8 @@
 
 [![build status](https://github.com/WebReflection/json-watch/actions/workflows/node.js.yml/badge.svg)](https://github.com/WebReflection/json-watch/actions) [![Coverage Status](https://coveralls.io/repos/github/WebReflection/json-watch/badge.svg?branch=main)](https://coveralls.io/github/WebReflection/json-watch?branch=main)
 
+<sup>**Social Media Photo by [Andrik Langfield](https://unsplash.com/@andriklangfield) on [Unsplash](https://unsplash.com/)**</sup>
+
 A modern take at this 7yo [json-watch](https://www.npmjs.com/package/json-watch) module.
 
 ```js
@@ -32,12 +34,12 @@ The default export `watcher(path[, options])` accepts an optional object to conf
 
 By default, the `options` object contains `{persistent: false}`. All [options for watch](https://nodejs.org/docs/latest/api/fs.html#fswatchfilename-options-listener) are available.
 
-## What are the differenced compared to the old module?
+## What are the differences compared to the old module?
 
   * multiple paths can be observerd, not just one per time
   * the first read is lazy
-  * Proxy is (imho) a better DX for this kind of utility use cases
+  * Proxy is (imho) a better DX for this kind of utility / use case
   * the amount of consumed memory is fine-tuned to the minumum
-  * the JSON can contain single line comments which, even if not allowed by specs, is practical for `settings.json` like config files and entries description
+  * the JSON can contain single line comments which, even if not allowed by specs, is practical for `settings.json` like config files and entries description (meaning, the `.json` file can also be a parsable `.js` file that preserve other `.json` rules)
   * it has 100% code coverage
   * it's a dual ESM / CJS module
